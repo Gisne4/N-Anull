@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     H = "GISNE4",
     S = "Online",
     CT = "Contact Me",
-    A = "../resourses/Untitled-2.png";
+    A = "resourses/Untitled-2.png";
   // NEW: Customizable Color/Design Values
   const CLR = {
     mainBg: "#1a1a1a",

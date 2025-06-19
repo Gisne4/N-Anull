@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
    * Preload function: Used to load all assets before the Phaser game starts.
    */
   function preload() {
-    this.load.svg("flex-logo", "../resourses/flex.svg"); // Ensure img/flex.svg exists
+    this.load.svg("flex-logo", "resourses/flex.svg"); // Ensure img/flex.svg exists
   }
 
   /**
