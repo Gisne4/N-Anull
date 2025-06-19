@@ -13,7 +13,6 @@ body {
 }
 .container {
   scroll-snap-type: y mandatory;
-  overflow-y: auto;
 }
 
 .container > div {
@@ -739,12 +738,13 @@ body {
   background: var(--bg-color); /* Dark background for the clock container */
   position: relative;
   /* Neumorphic convex effect */
-  box-shadow: 10px 10px 20px var(--dark-shadow),
-    -10px -10px 20px var(--light-shadow);
+  box-shadow: 0px 0px 30px var(--dark-shadow),
+    -0px -0px 30px var(--light-shadow);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden; /* Ensure Phaser canvas doesn't break rounded corners */
+  transform: scale(0.7);
 }
 
 /* Container for Phaser canvas inside analog-clock */
