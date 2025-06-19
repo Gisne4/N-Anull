@@ -13,11 +13,15 @@ body {
 }
 .container {
   scroll-snap-type: y mandatory;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .container > div {
   scroll-snap-align: start;
   height: 100vh;
+  width: 100vw;
 }
 .visual {
   position: relative;
