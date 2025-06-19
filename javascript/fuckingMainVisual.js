@@ -1729,4 +1729,31 @@ document.addEventListener("DOMContentLoaded", function () {
   init(); // Initialize the simulation
   // Trigger a resize event immediately to set the initial canvas size and FBOs correctly
   window.dispatchEvent(new Event("resize"));
+
+  //Typed js
+  const selectTyped = document.querySelector(".typed");
+  if (selectTyped) {
+    let typed_strings = selectTyped.getAttribute("data-typed-items");
+    typed_strings = typed_strings.split(",");
+    //I Love this guy
+    new Typed(".typed", {
+      strings: typed_strings,
+      loop: true,
+      typeSpeed: 100,
+      backSpeed: 50,
+      backDelay: 2000,
+    });
+  }
+  const selectTyped_2 = document.querySelector(".typed_2");
+  if (selectTyped_2) {
+    let typed_strings = selectTyped_2.getAttribute("data-typed-items");
+    typed_strings = typed_strings.split(",");
+    new Typed(".typed_2", {
+      strings: typed_strings,
+      loop: true,
+      typeSpeed: 20,
+      backSpeed: 10,
+      backDelay: 800,
+    });
+  }
 });

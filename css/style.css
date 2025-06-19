@@ -98,6 +98,14 @@ body {
   transition: opacity 0.05s ease-out; /* Smooth out opacity changes */
   /* Initial font-variation-settings will be set by JS */
 }
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+.type_container {
+  position: absolute;
+  left: 200px;
+  bottom: 200px;
+  color: var(--hand-color-1);
+  font-family: "Montserrat", sans-serif;
+}
 
 /** Charactor card*/
 /* CSS with custom color variables */
@@ -666,14 +674,13 @@ body {
 }
 
 :root {
-  /* Define a dark base color palette for neumorphism */
-  --bg-color: #212429; /* Dark blue-grey background */
-  --light-shadow: #3a414b; /* Lighter shade for highlight */
-  --dark-shadow: #1e2124; /* Darker shade for shadow */
-  --text-color: #e0e0e0; /* Light grey for general text */
-  --hand-color-1: #e0e0e0; /* Light grey for hour/minute hands (CSS variable, actual hands are in JS) */
-  --hand-color-2: #ff6b6b; /* Red-orange for second hand (kept for contrast) */
-  --dot-matrix-color: #00e676; /* Bright green for digital display dots */
+  --bg-color: #212429;
+  --light-shadow: #3a414b;
+  --dark-shadow: #1e2124;
+  --text-color: #e0e0e0;
+  --hand-color-1: #e0e0e0;
+  --hand-color-2: #ff6b6b;
+  --dot-matrix-color: #119c59;
 }
 
 .con3 {
@@ -857,4 +864,10 @@ body {
 
 .footer-right a:hover {
   color: var(--hand-color-2); /* Highlight on hover */
+}
+@media (max-width: 1200px) {
+  .digital-time,
+  .digital-date {
+    display: none;
+  }
 }
