@@ -68,6 +68,25 @@
         font-size: 40px;
       }
 
+      .list-title {
+        position: absolute;
+        top: 5%;
+        left: 100px;
+        color: #ffffff;
+        z-index: 2;
+      }
+      .list-title.active {
+        opacity: 1;
+        pointer-events: auto;
+        transition: 0.5s ease;
+      }
+
+      .list-title.inactive {
+        pointer-events: none;
+        opacity: 0;
+        transition: 0.1s ease;
+      }
+
       .face-title {
         position: absolute;
         top: 50%;
@@ -142,6 +161,9 @@
   </head>
   <body>
     <div id="infinite-grid-menu-container">
+      <h1 id="list-title" class="list-title">
+        COMPONENTS LIST <br />Drag For More
+      </h1>
       <canvas id="infinite-grid-menu-canvas"></canvas>
       <h2 id="face-title" class="face-title"></h2>
       <p id="face-description" class="face-description"></p>
@@ -234,17 +256,17 @@
             ivec2 texSize = textureSize(uTex, 0);
             float imageAspect = float(texSize.x) / float(texSize.y);
             float containerAspect = 1.0;
-            
-            float scale = max(imageAspect / containerAspect, 
+
+            float scale = max(imageAspect / containerAspect,
                                 containerAspect / imageAspect);
-            
+
             vec2 st = vec2(vUvs.x, 1.0 - vUvs.y);
             st = (st - 0.5) * scale + 0.5;
-            
+
             st = clamp(st, 0.0, 1.0);
-            
+
             st = st * cellSize + cellOffset;
-            
+
             outColor = texture(uTex, st);
             outColor.a *= vAlpha;
         }
@@ -784,7 +806,7 @@
 
       class InfiniteGridMenu {
         TARGET_FRAME_DURATION = 1000 / 60;
-        SPHERE_RADIUS = 2;
+        SPHERE_RADIUS = 1;
 
         #time = 0;
         #deltaTime = 0;
@@ -1054,7 +1076,7 @@
           let positions = this.instancePositions.map((p) =>
             vec3.transformQuat(vec3.create(), p, this.control.orientation)
           );
-          const scale = 0.2;
+          const scale = 0.13;
           const SCALE_INTENSITY = 0.6;
           positions.forEach((p, ndx) => {
             const s =
@@ -1311,6 +1333,7 @@
 
       function initInfiniteMenu() {
         const canvas = document.getElementById("infinite-grid-menu-canvas");
+        const listTitle = document.getElementById("list-title");
         const faceTitle = document.getElementById("face-title");
         const faceDescription = document.getElementById("face-description");
         const actionButton = document.getElementById("action-button");
@@ -1339,7 +1362,12 @@
         };
 
         const handleMovementChange = (isMoving) => {
-          const elements = [faceTitle, faceDescription, actionButton];
+          const elements = [
+            faceTitle,
+            faceDescription,
+            actionButton,
+            listTitle,
+          ];
           elements.forEach((el) => {
             if (isMoving) {
               el.classList.remove("active");
