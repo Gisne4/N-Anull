@@ -654,7 +654,6 @@ body {
 /**for con2 */
 .con2 {
   margin: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -675,7 +674,6 @@ body {
 
 .con3 {
   font-family: "Montserrat", sans-serif;
-  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -699,14 +697,18 @@ body {
 }
 /* Main Container for the clock and digital displays */
 .con3_1 {
+  position: absolute;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   max-width: 1200px;
   flex-grow: 1;
-  padding: 20px;
   box-sizing: border-box;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Digital Displays */
@@ -764,6 +766,16 @@ body {
   border-radius: 50%; /* Keep it circular */
 }
 
+@keyframes shit-i-cant-stop-it {
+  0% {
+    transform: translate(0%, -5px);
+  }
+
+  100% {
+    transform: translate(0%, 5px);
+  }
+}
+
 /* Bottom text inside analog clock (HTML elements, not Phaser) */
 .clock-bottom-text {
   position: absolute;
@@ -774,6 +786,7 @@ body {
   opacity: 0.7; /* Slightly faded */
   letter-spacing: 1px;
   z-index: 20; /* Ensure it's above the canvas */
+  animation: shit-i-cant-stop-it 1.5s alternate both linear infinite;
 }
 .clock-bottom-text p {
   margin: 3px 0;
