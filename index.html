@@ -28,7 +28,9 @@
   </head>
   <body>
     <div class="door-wrapper">
-      <div class="door-panel-static top">Welcome Stranger</div>
+      <div class="door-panel-static top" style="font-size: 40px">
+        Welcome Stranger
+      </div>
       <div class="door-middle-section">
         <canvas id="gearCanvas"></canvas>
         <!-- Canvas for gear animation -->
@@ -47,7 +49,9 @@
         <!-- Loading text -->
         <h1 class="loading-text" data-splitting>Loading...</h1>
       </div>
-      <div class="door-panel-static bottom">SYSTEM ONLINE</div>
+      <div class="door-panel-static bottom" style="font-size: 40px">
+        SYSTEM ONLINE
+      </div>
     </div>
 
     <div id="messageBox" class="message-box rounded-lg shadow-lg"></div>
@@ -151,24 +155,22 @@
         ></iframe>
       </div>
       <div class="con3">
-        <div class="header-text">MY CURRENT LOCAL TIME</div>
+        <div class="header-text">Here is the Currunt Timer for U</div>
         <div class="con3_1">
           <div class="digital-time">00:00</div>
           <!-- Initial digital time -->
           <div class="analog-clock">
             <!-- This div will host the Phaser canvas -->
             <div id="clock-phaser-container"></div>
-
-            <!-- Text elements that are part of the static HTML/CSS design -->
-            <div class="clock-bottom-text">
-              <p>I'M PROBABLY NOT SLEEPING</p>
-              <p>HIT ME UP</p>
-            </div>
           </div>
           <div class="digital-date">XXX</div>
           <!-- Initial digital date -->
         </div>
-
+        <!-- Text elements that are part of the static HTML/CSS design -->
+        <div class="clock-bottom-text">
+          <p>I'M PROBABLY NOT SLEEPING</p>
+          <p>HIT ME UP</p>
+        </div>
         <div class="footer">
           <div class="footer-left">
             <span>Coded 2025</span>
