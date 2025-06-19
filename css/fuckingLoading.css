@@ -1,0 +1,206 @@
+.door-wrapper {
+  position: absolute;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Hide parts that slide out */
+  background-color: #2c405a; /* Darker blue background for the door area */
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7); /* Inner shadow for depth */
+  z-index: 10;
+}
+
+/* Top and Bottom static door panels */
+.door-panel-static {
+  width: 100%;
+  height: 15vh; /* Responsive height for top/bottom sections */
+  background-color: #3a577a; /* Main door panel blue */
+  border-bottom: 2px solid #2c405a; /* Separator lines matching darker background */
+  border-top: 2px solid #2c405a;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4); /* Inner shadow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a0aec0; /* Light text for details */
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  position: relative;
+  z-index: 10;
+}
+.door-panel-static::before,
+.door-panel-static::after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 80%;
+  background-color: #5d81a9; /* Lighter blue for details */
+  border-radius: 2px;
+  opacity: 0.6;
+}
+.door-panel-static::before {
+  top: 15%;
+}
+.door-panel-static::after {
+  bottom: 15%;
+}
+
+.door-panel-static.top {
+  border-bottom: none;
+}
+.door-panel-static.bottom {
+  border-top: none;
+}
+
+.door-middle-section {
+  position: relative;
+  flex-grow: 1; /* Takes remaining space */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a202c; /* Background color for the revealed area */
+  overflow: hidden; /* Important for sliding panels */
+}
+
+/* The actual sliding door parts */
+.door-slide-panel {
+  position: absolute;
+  top: 0;
+  width: 50%; /* Each panel covers half the middle section */
+  height: 100%;
+  background-color: #3a577a; /* Main door panel blue */
+  border-left: 3px solid #2c405a; /* Vertical separators matching darker background */
+  border-right: 3px solid #2c405a;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+  z-index: 10; /* Above the loading text and background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* For inner details */
+}
+
+.door-slide-panel.left {
+  left: 0;
+  transform: translateX(0%); /* Initial position */
+  border-left: none;
+}
+
+.door-slide-panel.right {
+  right: 0;
+  transform: translateX(0%); /* Initial position */
+  border-right: none;
+}
+
+/* Inner details for sliding panels */
+.door-detail-stripe {
+  position: absolute;
+  width: 100%;
+  height: 12px; /* Slightly thicker */
+  background: linear-gradient(
+    90deg,
+    #5d81a9 0%,
+    #4a5568 50%,
+    #5d81a9 100%
+  ); /* Metallic gradient */
+  opacity: 0.8; /* Slightly less opaque to show underlying texture */
+  border-radius: 3px; /* Slightly rounded corners */
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1),
+    /* Top highlight */ 0 -1px 0 rgba(0, 0, 0, 0.3),
+    /* Bottom shadow */ inset 0 1px 3px rgba(0, 0, 0, 0.5),
+    /* Inner dark bevel */ inset 0 -1px 3px rgba(255, 255, 255, 0.1); /* Inner light bevel */
+  transform: scaleY(0.9); /* Slightly compress vertically for a recessed look */
+  position: relative; /* For pseudo-elements */
+}
+/* Adding screw-like details to the stripes */
+.door-detail-stripe::before,
+.door-detail-stripe::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #2c405a; /* Darker color for screws */
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+}
+.door-detail-stripe::before {
+  left: 8px;
+}
+.door-detail-stripe::after {
+  right: 8px;
+}
+
+.door-slide-panel.left .door-detail-stripe:nth-child(1) {
+  top: 20%;
+}
+.door-slide-panel.left .door-detail-stripe:nth-child(2) {
+  top: 40%;
+}
+.door-slide-panel.left .door-detail-stripe:nth-child(3) {
+  top: 60%;
+}
+.door-slide-panel.right .door-detail-stripe:nth-child(1) {
+  bottom: 20%;
+}
+.door-slide-panel.right .door-detail-stripe:nth-child(2) {
+  bottom: 40%;
+}
+.door-slide-panel.right .door-detail-stripe:nth-child(3) {
+  bottom: 60%;
+}
+
+/* Canvas for gears */
+#gearCanvas {
+  position: absolute; /* Position it within the middle section */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Below the sliding doors initially, will be visible when doors open */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.5s ease; /* For smooth fade in/out */
+}
+
+.loading-text {
+  font-size: clamp(2rem, 8vw, 5rem); /* Responsive font size */
+  font-weight: 700;
+  color: #e2e8f0; /* Light gray text */
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  position: relative;
+  z-index: 5; /* Above the canvas, below the sliding panels initially */
+  opacity: 0; /* Initially hidden, will be revealed by door */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Subtle glow */
+}
+/* Splitting.js adds .char and .word classes */
+.char {
+  display: inline-block; /* Essential for individual char animations */
+  opacity: 0; /* Initially hidden */
+  transform: translateY(20px); /* Start slightly below */
+}
+
+/* Basic message box styling for a non-alert message */
+.message-box {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  display: none; /* Hidden by default */
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.message-box.show {
+  display: block;
+  opacity: 1;
+}

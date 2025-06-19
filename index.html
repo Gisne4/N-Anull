@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fucking portfolio_MK8</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/fuckingLoading.css" />
+    <script src="javascript/fuckingLoading.js"></script>
+    <script src="javascript/fuckingMainVisual.js"></script>
+    <script src="javascript/fuckingCharactorCard.js"></script>
+    <script src="javascript/fuckingCon3Thing.js"></script>
+    <!-- Three.js CDN for 3D rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Postprocessing.js CDN for visual effects like Bloom and SMAA -->
+    <!-- This version exposes the necessary classes globally under the POSTPROCESSING namespace -->
+    <script src="https://unpkg.com/postprocessing@6.29.3/build/postprocessing.js"></script>
+    <!-- Splitting.js CDN -->
+    <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+    <!-- Anime.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.87.0/phaser.min.js"
+      integrity="sha512-e251dDfxfj70o3iWsf84M612cWbWdTXjVbFXA7MavobTcKB1sCLV+WNiduc20UrpWLXRgi1tgob1TOAfySx9Xg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div class="door-wrapper">
+      <div class="door-panel-static top">Welcome Stranger</div>
+      <div class="door-middle-section">
+        <canvas id="gearCanvas"></canvas>
+        <!-- Canvas for gear animation -->
+        <!-- Main sliding door panels -->
+        <div id="doorSlideLeft" class="door-slide-panel left">
+          <div class="door-detail-stripe"></div>
+          <div class="door-detail-stripe"></div>
+          <div class="door-detail-stripe"></div>
+        </div>
+        <div id="doorSlideRight" class="door-slide-panel right">
+          <div class="door-detail-stripe"></div>
+          <div class="door-detail-stripe"></div>
+          <div class="door-detail-stripe"></div>
+        </div>
+
+        <!-- Loading text -->
+        <h1 class="loading-text" data-splitting>Loading...</h1>
+      </div>
+      <div class="door-panel-static bottom">SYSTEM ONLINE</div>
+    </div>
+
+    <div id="messageBox" class="message-box rounded-lg shadow-lg"></div>
+
+    <div class="container">
+      <div class="visual">
+        <!-- The canvas element where the fluid simulation will be rendered -->
+        <canvas id="fluidCanvas"></canvas>
+        <!-- The outer div for the example usage, setting the stage -->
+        <div
+          style="
+            position: absolute;
+            top: 0px;
+            height: 300px;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <div
+            class="text-pressure-container"
+            style="--text-color: #813939; --stroke-color: #ff0000"
+          >
+            <h1 id="textPressureTitle" class="text-pressure-title">
+              <!-- Characters will be dynamically inserted here by JavaScript -->
+            </h1>
+          </div>
+        </div>
+        <!--Charactor card part-->
+        <div
+          class="pc-card-wrapper"
+          id="w"
+          style="
+            --icon: none;
+            --grain: none;
+            --behind-gradient: radial-gradient(
+                farthest-side circle at var(--px) var(--py),
+                hsla(266, 100%, 90%, var(--o)) 4%,
+                hsla(266, 50%, 80%, calc(var(--o) * 0.75)) 10%,
+                hsla(266, 25%, 70%, calc(var(--o) * 0.5)) 50%,
+                hsla(266, 0%, 60%, 0) 100%
+              ),
+              radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%),
+              radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%),
+              conic-gradient(
+                from 124deg at 50% 50%,
+                #c137ffff 0%,
+                #07c6ffff 40%,
+                #07c6ffff 60%,
+                #c137ffff 100%
+              );
+            --inner-gradient: linear-gradient(
+              145deg,
+              #60496e8c 0%,
+              #71c4ff44 100%
+            );
+          "
+        >
+          <section id="c" class="pc-card">
+            <div class="pc-inside">
+              <div class="pc-shine"></div>
+              <div class="pc-glare"></div>
+              <div class="pc-content pc-avatar-content">
+                <img class="avatar" src="" alt="" loading="lazy" id="ma" />
+                <div class="pc-user-info">
+                  <div class="pc-user-details">
+                    <div class="pc-mini-avatar">
+                      <img src="" alt="" loading="lazy" id="mia" />
+                    </div>
+                    <div class="pc-user-text">
+                      <div class="pc-handle" id="ph"></div>
+                      <div class="pc-status" id="ps"></div>
+                    </div>
+                  </div>
+                  <button
+                    class="pc-contact-btn"
+                    id="cb"
+                    style="pointer-events: auto"
+                    type="button"
+                    aria-label=""
+                  ></button>
+                </div>
+              </div>
+              <div class="pc-content">
+                <div class="pc-details">
+                  <h3 id="pn"></h3>
+                  <p id="pt"></p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="con2">
+        <iframe
+          src="components/fuckinginfinitemenus.html"
+          frameborder="0"
+          style="height: 100vh; width: 100vw"
+        ></iframe>
+      </div>
+      <div class="con3">
+        <div class="header-text">MY CURRENT LOCAL TIME</div>
+        <div class="con3_1">
+          <div class="digital-time">00:00</div>
+          <!-- Initial digital time -->
+          <div class="analog-clock">
+            <!-- This div will host the Phaser canvas -->
+            <div id="clock-phaser-container"></div>
+
+            <!-- Text elements that are part of the static HTML/CSS design -->
+            <div class="clock-bottom-text">
+              <p>I'M PROBABLY NOT SLEEPING</p>
+              <p>HIT ME UP</p>
+            </div>
+          </div>
+          <div class="digital-date">XXX</div>
+          <!-- Initial digital date -->
+        </div>
+
+        <div class="footer">
+          <div class="footer-left">
+            <span>Coded 2025</span>
+          </div>
+          <div class="footer-center">
+            <a href="#" class="btn-neumorphic"><span>*</span> KRLEE.DEV</a>
+          </div>
+          <div class="footer-right">
+            <a href="#">GITHUB</a>
+            <a href="#">EMAIL</a>
+            <a href="#">CONTACT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
